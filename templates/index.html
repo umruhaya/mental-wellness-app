@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <script src="https://cdn.tailwindcss.com/3.4.15"></script>
+</head>
+<body class="bg-gray-100" style="font-family: 'Inter', sans-serif;">
+    <div class="min-h-screen flex items-center justify-center p-12">
+        <div class="mx-auto max-w-xl w-full bg-white p-10 rounded-lg shadow-lg">
+            <!-- Logo -->
+            <img src="/static/img/neurosense-logo.png" alt="Logo" class="block w-96 mx-auto mb-5">
+            
+            <h1 class="text-3xl font-semibold text-center mb-4">Welcome to the Neuroinformatics Project</h1>
+            <p class="text-center text-gray-600 mb-8">
+                This project aims to enhance EEG signal processing through various tests and assessments. 
+                We provide a user-friendly platform to explore different neuroinformatics tests and track your progress. 
+                Join us in this innovative journey to better understand brain activity.
+            </p>
+            <div class="flex justify-center gap-4 mt-6 col-span-3">
+                <!-- <a href="/signup" class="flex">
+                  <button class="bg-indigo-500 text-white font-medium rounded h-12 py-3.5 px-6 hover:bg-indigo-600 hover:shadow-lg">Sign Up</button>
+                </a>
+                <a href="/login" class="flex">
+                  <button class="bg-indigo-500 text-white font-medium rounded h-12 py-3.5 px-6 hover:bg-indigo-600 hover:shadow-lg">Login</button>
+                </a> -->
+                <a href="/dashboard" class="flex">
+                  <button class="bg-indigo-500 text-white font-medium rounded h-12 py-3.5 px-6 hover:bg-indigo-600 hover:shadow-lg">Dashboard</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

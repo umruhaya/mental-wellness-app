@@ -1,0 +1,12 @@
+fastapi
+jinja2
+uvicorn[standard]
+python-multipart
+
+# shared ml libs
+transformers
+torch -f https://download.pytorch.org/whl/cpu
+
+# Needed for audio
+torchaudio -f https://download.pytorch.org/whl/cpu
+speechbrain

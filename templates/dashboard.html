@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <script src="https://cdn.tailwindcss.com/3.4.15"></script>
+</head>
+<body class="bg-gray-100" style="font-family: 'Inter', sans-serif;">
+    <div class="min-h-screen flex items-center justify-center p-12">
+        <div class="mx-auto max-w-xl w-full bg-white p-10 rounded-lg shadow-lg">
+            <!-- Logo -->
+            <img src="/static/img/neurosense-logo.png" alt="Logo" class="block w-96 mx-auto mb-5">
+
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-semibold text-[#07074d]">Dashboard</h2>
+                <a href="/profile" class="profile-icon">
+                <img src="/static/img/profile-icon.png" alt="Profile Icon" class="w-10 h-10 rounded-full cursor-pointer">
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
+                <a href="/test-selection" class="flex flex-col items-center justify-center p-5 rounded-md bg-[#6a64f1] text-white text-center transition-colors duration-300 hover:bg-[#5a54d3]">
+                <img src="/static/img/test-icon.png" alt="Test Selection Icon" class="w-36 h-36 mb-2">
+                Test Selection
+                </a>
+
+                <a href="/track-progress" class="flex flex-col items-center justify-center p-5 rounded-md bg-[#6a64f1] text-white text-center transition-colors duration-300 hover:bg-[#5a54d3]">
+                <img src="/static/img/track-icon.png" alt="Track Progress Icon" class="w-36 h-36 mb-2">
+                Track Progress
+                </a>
+
+                <a href="/make-appointment" class="flex flex-col items-center justify-center p-5 rounded-md bg-[#6a64f1] text-white text-center transition-colors duration-300 hover:bg-[#5a54d3]">
+                <img src="/static/img/appointment-icon.png" alt="Make Appointment Icon" class="w-36 h-36 mb-2">
+                Make Appointment
+                </a>
+
+                <a href="/logout" class="flex flex-col items-center justify-center p-5 rounded-md bg-[#ff4d4d] text-white text-center transition-colors duration-300 hover:bg-[#ff1a1a]">
+                <img src="/static/img/logout-icon.png" alt="Logout Icon" class="w-36 h-36 mb-2">
+                Logout
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
