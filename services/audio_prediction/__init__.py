@@ -1,0 +1,1 @@
+from services.audio_prediction.main import predict_audio_for_emotions
