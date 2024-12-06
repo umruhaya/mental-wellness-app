@@ -1,0 +1,4 @@
+secretsprovider: gcpkms://projects/mental-wellness-lums/locations/us-central1/keyRings/pulumi-key-ring/cryptoKeys/pulumi-iac-key
+encryptedkey: CiQABkwUNtaxqUYT7idHysQEC947kpU5+IOM4wlkEJ1NKqOFcsQSSQC3zQ+mbzDztshVqKI5x+PmCSSa6bvmtxrfaRjgUENNgUPR+rud7Zj8eFaqG8bLNYPlLwbvqmiF9Hc3FqsTmo+Rz0AqM4UjUjY=
+config:
+  gcp:project: mental-wellness-lums
