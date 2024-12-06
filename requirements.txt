@@ -12,5 +12,6 @@ torchaudio -f https://download.pytorch.org/whl/cpu
 speechbrain
 
 # Image/Vision Modules Needed for Facial Prediction
+pillow
 tf-keras
 opencv-python>=3.2
