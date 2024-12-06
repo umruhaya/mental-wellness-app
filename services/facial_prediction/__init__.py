@@ -1,0 +1,1 @@
+from services.facial_prediction.main import predict_face_for_emotions
