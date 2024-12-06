@@ -111,3 +111,16 @@ pnpm i
 ### Update
 
 Make changes to index.ts and run `pulumi up`
+
+## Server Deployment
+
+server requires all of these packages
+
+- `ffmpeg` for torchaudio backend
+- `libgl1-mesa-glx libgl1-mesa-dri` for numpy
+- `python3` and `pip` 
+
+```bash
+sudo apt update
+sudo apt install ffmpeg libgl1-mesa-glx libgl1-mesa-dri python3 python3-pip -y
+```
