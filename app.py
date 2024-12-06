@@ -7,6 +7,8 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
 from services.audio_prediction import predict_audio_for_emotions
+from services.facial_prediction import predict_face_for_emotions
+from services.text_prediction import predict_text_for_emotions
 
 app = FastAPI()
 
@@ -68,6 +70,47 @@ async def post_audio_form(request: Request, audio_file: UploadFile = File(...)):
 
     # Render the template with prediction results
     return templates.TemplateResponse("predict-audio.html", {"request": request, "title": "Audio Prediction", "predictions": predictions})
+
+# GET endpoint to render the HTML template
+@app.get("/predict/facial", response_class=HTMLResponse)
+async def get_facial_form(request: Request):
+    return templates.TemplateResponse("predict-facial.html", {"request": request, "title": "Facial Prediction"})
+
+# POST endpoint to handle image file upload and prediction
+@app.post("/predict/facial", response_class=HTMLResponse)
+async def post_facial_form(request: Request, image_file: UploadFile = File(...)):
+    print(image_file.content_type)
+    # Check file extension
+    if image_file.content_type not in ["image/jpeg", "image/png"]:
+        raise HTTPException(status_code=400, detail="Invalid image format. Only JPEG and PNG are supported.")
+    
+    # Save the uploaded file to a temporary location
+    file_location = f"temp_{image_file.filename}"
+    with open(file_location, "wb") as f:
+        f.write(await image_file.read())
+    
+    # Predict the uploaded image file
+    predictions = predict_face_for_emotions(file_location)
+    
+    # Delete the temporary file after processing
+    os.remove(file_location)
+    
+    # Render the template with prediction results
+    return templates.TemplateResponse("predict-facial.html", {"request": request, "title": "Facial Prediction", "predictions": predictions})
+
+# GET endpoint to render the HTML template for text prediction
+@app.get("/predict/text", response_class=HTMLResponse)
+async def get_text_form(request: Request):
+    return templates.TemplateResponse("predict-text.html", {"request": request, "title": "Text Prediction"})
+
+# POST endpoint to handle text input and prediction
+@app.post("/predict/text", response_class=HTMLResponse)
+async def post_text_form(request: Request, text_input: str = Form(...)):
+    # Process the text input and make predictions
+    predictions = predict_text_for_emotions(text_input)
+    
+    # Render the template with prediction results
+    return templates.TemplateResponse("predict-text.html", {"request": request, "title": "Text Prediction", "predictions": predictions})
 
 # Add a custom 404 not found handler
 @app.exception_handler(404)
