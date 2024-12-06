@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <script src="https://cdn.tailwindcss.com/3.4.15"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100" style="font-family: 'Inter', sans-serif;">
+    <div class="min-h-screen flex items-center justify-center p-12">
+        <div class="mx-auto max-w-xl w-full bg-white p-10 rounded-lg shadow-lg">
+            <!-- Logo -->
+            <div class="flex justify-center">
+                <img src="/static/img/neurosense-logo.png" alt="Logo" class="block w-96 mx-auto">
+            </div>
+
+            <h2 class="text-2xl font-semibold text-center text-gray-800 mb-2">Image Test</h2>
+            
+            <p class="text-center text-gray-600 mb-6">Upload an image file (JPEG or PNG) for analysis.</p>
+            
+            <form method="POST" action="" enctype="multipart/form-data">
+                <!-- File Input -->
+                <div class="mb-6" id="upload-box">
+                <label class="block text-pink-500 text-md font-bold mb-2" for="image_file">
+                Upload File
+                </label>
+                <div class="flex justify-center items-center px-4 py-6 border-4 border-dashed border-pink-300 rounded-lg bg-pink-50 hover:bg-pink-100 cursor-pointer">
+                <input id="image_file" name="image_file" type="file" accept=".jpeg, .jpg, .png" required class="sr-only">
+                <div class="text-center">
+                <svg class="mx-auto h-12 w-12 text-pink-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 48 48" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M48 28v16a2 2 0 01-2 2H2a2 2 0 01-2-2V28m4 0h16l4 4 4-4h16M4 14l4.592-4.404A6 6 0 0113.677 8H19a2 2 0 011.694.777L24 12h16a2 2 0 012 2v4" />
+                </svg>
+                <p class="mt-2 text-sm text-pink-600 font-semibold">Click to upload an image file</p>
+                <p class="mt-1 text-xs text-pink-500">Allowed formats: JPEG, PNG. Maximum file size: 10MB.</p>
+                </div>
+                </div>
+                </div>
+                <!-- Image Preview -->
+                <div id="image-preview" class="mb-6"></div>
+                <!-- Predict Button -->
+                <button type="submit" class="w-full px-4 py-2 text-white font-semibold bg-indigo-600 hover:bg-indigo-700 rounded-lg">Predict</button>
+            </form>
+
+            <!-- Prediction Results -->
+            {% if predictions %}
+                <div class="mt-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Prediction Results</h3>
+                    <ul class="list-disc list-inside">
+                        {% for prediction in predictions %}
+                            <li class="mb-2">
+                                <span class="font-medium">{{ prediction.label }}:</span> {{ prediction.score }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- JavaScript for Image Preview -->
+    <script>
+        const imageInput = document.getElementById('image_file');
+        const uploadBox = document.getElementById('upload-box');
+        const imagePreview = document.getElementById('image-preview');
+        // Trigger file input click on box click
+        uploadBox.addEventListener('click', function() {
+            imageInput.click();
+        });
+        // Handle image input and preview
+        imageInput.addEventListener('change', function() {
+            const files = imageInput.files;
+            if (files.length > 0) {
+                const file = files[0];
+                const fileURL = URL.createObjectURL(file);
+                // Clear any existing image
+                imagePreview.innerHTML = '';
+                // Create image element
+                const imageElement = document.createElement('img');
+                imageElement.src = fileURL;
+                imageElement.classList.add('max-w-full', 'h-auto', 'rounded-lg');
+                // Append to preview
+                imagePreview.appendChild(imageElement);
+            } else {
+                imagePreview.innerHTML = '';
+            }
+        });
+    </script>
+</body>
+</html>
