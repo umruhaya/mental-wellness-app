@@ -1,6 +1,6 @@
 import os
 from fastapi import FastAPI, Request, Form, File, UploadFile, HTTPException
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.exceptions import RequestValidationError
@@ -22,6 +22,11 @@ templates = Jinja2Templates(directory="templates")
 async def home_page(request: Request):
     # Render the 'index.html' template with the 'title' variable
     return templates.TemplateResponse('index.html', {"request": request, "title": "Home Page"})
+
+@app.get("/health", response_class=PlainTextResponse)
+async def health_check():
+    # Return the smallest possible payload with a simple status code.
+    return "OK\n"
 
 @app.get("/dashboard", response_class=HTMLResponse)
 async def home_page(request: Request):
@@ -108,6 +113,7 @@ async def get_text_form(request: Request):
 async def post_text_form(request: Request, text_input: str = Form(...)):
     # Process the text input and make predictions
     predictions = predict_text_for_emotions(text_input)
+
     
     # Render the template with prediction results
     return templates.TemplateResponse("predict-text.html", {"request": request, "title": "Text Prediction", "predictions": predictions})
