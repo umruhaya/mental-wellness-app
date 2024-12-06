@@ -10,3 +10,7 @@ torch -f https://download.pytorch.org/whl/cpu
 # Needed for audio
 torchaudio -f https://download.pytorch.org/whl/cpu
 speechbrain
+
+# Image/Vision Modules Needed for Facial Prediction
+tf-keras
+opencv-python>=3.2
