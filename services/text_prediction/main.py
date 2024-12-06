@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from transformers import pipeline
 
-classifier = pipeline("sentiment-analysis", model="ayoubkirouane/BERT-Emotions-Classifier", return_all_scores=True)
+classifier = pipeline("sentiment-analysis", model="ayoubkirouane/BERT-Emotions-Classifier", top_k=None)
 
 def softmax(scores):
     exp_scores = np.exp(scores - np.max(scores))  # Subtract max for numerical stability
