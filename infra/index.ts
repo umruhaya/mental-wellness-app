@@ -70,7 +70,7 @@ const instanceGroup = new gcp.compute.InstanceGroup(`${instanceName}-group`, {
 const healthCheck = new gcp.compute.HttpHealthCheck(`${loadBalancerName}-hc`, {
     project: projectId,
     port: APP_PORT,
-    requestPath: "/",
+    requestPath: "/health",
 })
 
 // Create a backend service
