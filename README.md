@@ -114,6 +114,8 @@ Make changes to index.ts and run `pulumi up`
 
 ## Server Deployment
 
+### Install Dependencies
+
 server requires all of these packages
 
 - `ffmpeg` for torchaudio backend
@@ -123,4 +125,55 @@ server requires all of these packages
 ```bash
 sudo apt update
 sudo apt install ffmpeg libgl1-mesa-glx libgl1-mesa-dri python3 python3-pip -y
+```
+
+### Server Setup
+
+Instead of directly running the uvicorn command, we would use `systemd` to manage the server process.
+
+First Create a systemd config file
+
+```ini
+[Unit]
+Description=Mental Wellness Uvicorn Daemon
+After=network.target
+
+[Service]
+User=umernaeem135acc
+Group=umernaeem135acc
+WorkingDirectory=/home/umernaeem135acc/mentall-wellness-app
+ExecStart=/home/umernaeem135acc/.local/bin/uvicorn app:app --host 0.0.0.0 --port 8000
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+After creating this file, follow these steps to reload `systemd` and start the service:
+
+```bash
+# Reload systemd to recognize the new service file
+sudo systemctl daemon-reload
+
+# Start the uvicorn service
+sudo systemctl start uvicorn.service
+
+# Enable the service to start on boot
+sudo systemctl enable uvicorn.service
+```
+
+### Server Restart For Update
+
+Whenever you want to refresh the server, (lets say you just ran `git pull` and updated the source code) then run 
+
+```bash
+sudo systemctl restart uvicorn.service
+```
+
+### View Server Logs
+
+T see th logs of the server run 
+
+```bash
+journalctl -u uvicorn.service
 ```
