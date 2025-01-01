@@ -8,6 +8,8 @@ We predict emotional states using
 
 ## Install Dependencies
 
+if one server, first clone the repo using `git clone https://github.com/umruhaya/mental-wellness-app`
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -133,6 +135,10 @@ Instead of directly running the uvicorn command, we would use `systemd` to manag
 
 First Create a systemd config file
 
+```bash
+sudo vim /etc/systemd/system/mental-wellness.service
+```
+
 ```ini
 [Unit]
 Description=Mental Wellness Uvicorn Daemon
@@ -141,7 +147,7 @@ After=network.target
 [Service]
 User=umernaeem135acc
 Group=umernaeem135acc
-WorkingDirectory=/home/umernaeem135acc/mentall-wellness-app
+WorkingDirectory=/home/umernaeem135acc/mental-wellness-app
 ExecStart=/home/umernaeem135acc/.local/bin/uvicorn app:app --host 0.0.0.0 --port 8000
 Restart=always
 
@@ -156,10 +162,10 @@ After creating this file, follow these steps to reload `systemd` and start the s
 sudo systemctl daemon-reload
 
 # Start the uvicorn service
-sudo systemctl start uvicorn.service
+sudo systemctl start mental-wellness.service
 
 # Enable the service to start on boot
-sudo systemctl enable uvicorn.service
+sudo systemctl enable mental-wellness.service
 ```
 
 ### Server Restart For Update
@@ -167,7 +173,7 @@ sudo systemctl enable uvicorn.service
 Whenever you want to refresh the server, (lets say you just ran `git pull` and updated the source code) then run 
 
 ```bash
-sudo systemctl restart uvicorn.service
+sudo systemctl restart mental-wellness.service
 ```
 
 ### View Server Logs
@@ -175,5 +181,5 @@ sudo systemctl restart uvicorn.service
 T see th logs of the server run 
 
 ```bash
-journalctl -u uvicorn.service
+journalctl -u mental-wellness.service
 ```
